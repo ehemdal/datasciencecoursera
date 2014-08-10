@@ -15,14 +15,14 @@ complete <- function(directory, id = 1:332) {
   
   #Set default variables
   if (directory == "") directory <- "C:/DataScience/specdata/"
-  debug <- 1
+  debug <- 0
   
   # Format filenames
   fn <- formatC(id, width = 3, format = "d", flag = "0")
   filename <- paste(fn, ".csv", sep ="")
   
   # Loop over all the id's, and for each:
-  for (site in id) {
+  for (site in 1:length(id)) {
     if (debug == 1) print( site)
     
     # Read the file into a data frame
@@ -35,9 +35,9 @@ complete <- function(directory, id = 1:332) {
     # Count the complete cases and add to the data frame
     n <- sum(complete.cases(d))
     if(!exists("res")) {
-      res <-data.frame(id = site, nobs = n)
+      res <-data.frame(id = id[site], nobs = n)
     }
-    else {res <- (rbind(res, c(id = site, nobs = n)))}
+    else {res <- (rbind(res, c(id = id[site], nobs = n)))}
     
     
   }
