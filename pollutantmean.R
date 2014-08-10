@@ -23,7 +23,10 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   
   #Set default variables
   if (directory == "") directory <- "C:/DataScience/specdata/"
-  debug <- 2
+  debug <- 0
+  
+  # Format filenames
+  id <- formatC(id, width = 3, format = "d", flag = "0")
   
   if (debug == 1) print("Debugging started") 
   # Loop over all the id's, and for each:
@@ -31,9 +34,6 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
     if (debug == 1) print( site)
     
     # Build a filename to read from directory, id and ".csv"
-    # Fix the site to be 3 chars long
-    if (site < 10) site <- paste("00", site, sep = "")
-    else if (site < 99) site <- paste("0", site)
     filename <- paste(site, ".csv", sep = "")
     if (debug == 1) print(filename)
 
@@ -42,6 +42,20 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
     setwd(directory)
     d <- read.csv(filename)
     if (debug == 2) print(d)
+    # Subset the data frame by pollutant
+    subset <- d[,pollutant]
+    subset <- subset[!is.na(subset)]
+    
+    # Add the data to a vector of data points 
+    if(exists("datav") == TRUE) {
+      datav <- c(datav, subset)
+    }
+    else {
+      datav <- subset # first time through only
+    } 
   }
-
+    
+  # Cleanup
+  setwd(olddir)
+  return(mean(datav, rm.na = TRUE))
 }
