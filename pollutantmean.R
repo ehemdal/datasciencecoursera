@@ -12,6 +12,9 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   ## Return the mean of the pollutant across all monitors list
   ## in the 'id' vector (ignoring NA values)
   
+  ## Note: Specification of the directory presumes that it is just below
+  ## the CWD; no effort has been made to do anything fancier
+  
   # Strategy:
   # Loop over all the id's, and for each:
   # Build a filename to read from directory, id and ".csv"
@@ -39,6 +42,7 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
 
     # Read the file into a data frame
     olddir <- getwd()
+    setwd("C:/DataScience/") 
     setwd(directory)
     d <- read.csv(filename)
     if (debug == 2) print(d)
@@ -57,5 +61,5 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
     
   # Cleanup
   setwd(olddir)
-  return(mean(datav, rm.na = TRUE))
+  return(round(mean(datav, rm.na = TRUE),3)) #sample results rounded to 3 places
 }
