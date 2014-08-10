@@ -21,12 +21,27 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   # After looping over all the means, return the mean of this vector.
   # Call mean(vector, na.rm=TRUE)  
   
-  debug <- 1
+  #Set default variables
+  if (directory == "") directory <- "C:/DataScience/specdata/"
+  debug <- 2
   
-  if (debug >= 1) print("Debugging started") 
+  if (debug == 1) print("Debugging started") 
   # Loop over all the id's, and for each:
   for (site in id) {
-    print( site)
+    if (debug == 1) print( site)
+    
+    # Build a filename to read from directory, id and ".csv"
+    # Fix the site to be 3 chars long
+    if (site < 10) site <- paste("00", site, sep = "")
+    else if (site < 99) site <- paste("0", site)
+    filename <- paste(site, ".csv", sep = "")
+    if (debug == 1) print(filename)
+
+    # Read the file into a data frame
+    olddir <- getwd()
+    setwd(directory)
+    d <- read.csv(filename)
+    if (debug == 2) print(d)
   }
 
 }
