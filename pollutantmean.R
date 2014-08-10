@@ -11,7 +11,22 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   
   ## Return the mean of the pollutant across all monitors list
   ## in the 'id' vector (ignoring NA values)
-
-
+  
+  # Strategy:
+  # Loop over all the id's, and for each:
+  # Build a filename to read from directory, id and ".csv"
+  # Read the file into a data frame
+  # Subset the data frame by pollutant
+  # Add the data to a vector of data points
+  # After looping over all the means, return the mean of this vector.
+  # Call mean(vector, na.rm=TRUE)  
+  
+  debug <- 1
+  
+  if (debug >= 1) print("Debugging started") 
+  # Loop over all the id's, and for each:
+  for (site in id) {
+    print( site)
+  }
 
 }
