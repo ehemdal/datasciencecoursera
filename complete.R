@@ -14,21 +14,24 @@ complete <- function(directory, id = 1:332) {
   ## number of complete cases
   
   #Set default variables
-  if (directory == "") directory <- "C:/DataScience/specdata/"
+  if (directory == "") directory <- "specdata"
   debug <- 0
   
   # Format filenames
   fn <- formatC(id, width = 3, format = "d", flag = "0")
   filename <- paste(fn, ".csv", sep ="")
   
+  # Set up directories
+  olddir <- getwd()
+  setwd("C:/DataScience/") 
+  setwd(directory)
+  
   # Loop over all the id's, and for each:
   for (site in 1:length(id)) {
     if (debug == 1) print( site)
     
-    # Read the file into a data frame
-    olddir <- getwd()
-    setwd("C:/DataScience/") 
-    setwd(directory)
+    # Read  the file into a data frame
+
     d <- read.csv(filename[site])
     if (debug == 2) print(d)
     
@@ -43,6 +46,6 @@ complete <- function(directory, id = 1:332) {
   }
     
 
-  
+  setwd(olddir)
   return(res)
 }
