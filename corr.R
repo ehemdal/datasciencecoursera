@@ -17,6 +17,7 @@ corr <- function(directory ="specdir", threshold = 0) {
   #  Assumes you are in the parent of directory
   
   # Get to the right directory
+  res <- vector("numeric") # in case we have no data
   olddir <- getwd()
   setwd(directory)
 
@@ -27,23 +28,25 @@ corr <- function(directory ="specdir", threshold = 0) {
   # Format filenames to open
   # Get id's to look at
   ids <- as.vector(cases[,"id"])
+  #if (length(ids) <= 0) return(0)
   fns <- formatC(ids, width = 3, format = "d", flag = "0")
   fns <- paste(fns, ".csv", sep = "")
-
   # Work on each file
-  for (file in fns){
+  i <- 1
+  while (i <= length(ids)){
+    file <- fns[i]
     d <- read.csv(file)
-    d <- d[complete.cases(d),]
+    #d <- d[complete.cases(d),]
     x <- as.vector(d[,"nitrate"])
     y <- as.vector(d[,"sulfate"])
-    if(exists("res")) {res <- signif(c(res,cor(x,y)),4)}
-       else {res <- signif(cor(x,y),4)}
+    if(exists("res")) {res <- c(res,cor(x,y, use="complete.obs"))}
+       else {res <- cor(x,y, use = "complete.obs")}
        
-    
+    i <- i + 1
   }
   
   # Do correlations
   
-  setwd(olddir)
+  setwd("C:/Datascience")
   return(res)
 }
