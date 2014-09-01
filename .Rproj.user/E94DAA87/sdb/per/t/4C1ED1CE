@@ -1,0 +1,17 @@
+{
+    "contents" : "best <- function(state, outcome) {\n  ## Read outcome data\n  setwd(\"C:/git/ProgrammingAssignment3\")\n  d <-read.csv(\"outcome-of-care-measures.csv\",colClasses=\"character\") #start w/out colClasses=\"character\"\n  #d <-read.csv(\"sample.csv\",colClasses=\"character\") #start w/out colClasses=\"character\"\n  \n  ## Check that state and outcome are valid; make a state list for splitting later\n  sl <- d[,7]\n  if (sum(state == sl) == 0) { stop(\"invalid state\")}\n  #else { print(\"OK state\")}\n  \n  ocname <- c(\"heart attack\" = 11, \"heart failure\" =17 ,\"pneumonia\" = 23)\n  \n  if (sum(outcome == names(ocname)) == 0) {stop(\"invalid outcome\")}\n  #else {print(\"OK outcome\")}\n  \n  # Get the column number from the input name\n  colnbr <- as.numeric(ocname[outcome])\n  \n  ## Return hospital name in that state with lowest 30-day death\n  ## rate\n  ## split the data frame d by state list\n  sd <- split(d,sl)  # list of lists of length 1 containing data.frames\n  ss <- (sd[[state]]) ## get at the data frame at the bottom\n  minval <- min(as.numeric(ss[,colnbr]),na.rm=TRUE)\n  test <- ss[,colnbr] == minval\n  result <- subset(ss[,2], test)\n  result <- sort(result)\n  # Handle duplicates by sorting\n  result[1]\n}",
+    "created" : 1408808984911.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "391691387",
+    "id" : "4C1ED1CE",
+    "lastKnownWriteTime" : 1408825904,
+    "path" : "C:/git/ProgrammingAssignment3/best.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : true,
+    "type" : "r_source"
+}
