@@ -36,30 +36,33 @@ unzip(destfile)
     activities <- as.vector(activities$V2)
     features <- read.table("features.txt")
     features <- as.vector(features$V2)
-  # 2) Read the test dataset into td
+
+  # 2) Read the test dataset into data
     setwd("test")
-    # td is a data.frame holding the test data with activity numbers in first col.
+    # testd is a data.frame holding the test data with activity numbers in first col.
     data <- read.table("X_test.txt")
     acts <- read.table("y_test.txt")
-    testd <- cbind(acts,data)
+    subjects <- read.table("subject_test.txt")
+    testd <- cbind(subjects,acts,data)
 
   # 3) Read the training dataset into traind; remove data and acts when done
     setwd("../train")
     data <- read.table("X_train.txt")
     acts <- read.table ("y_train.txt")
-    traind <- cbind(acts,data)
-    rm(acts,data)
+    subjects <- read.table("subject_train.txt")
+    traind <- cbind(subjects,acts,data)
+    rm(subjects,acts,data)
 
   # 4) Combine the two datasets 
   #    Add column names
   #    Change first column to descriptive activity names
     data <- rbind(testd, traind)
     rm(testd, traind)
-    vars <- c("Activity", as.vector(features))
+    vars <- c("Subject_ID","Activity", as.vector(features))
     colnames(data) <- vars
     for(i in 1:nrow(data)){
-      index <- as.integer(data[i,1])
-      data[i,1] <- activities[index]
+      index <- as.integer(data[i,2])
+      data[i,2] <- activities[index]
     }
 # Extracts only the measurements on the mean and standard deviation for each measurement. 
 # Uses descriptive activity names to name the activities in the data set
