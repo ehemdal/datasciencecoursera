@@ -1,5 +1,5 @@
 # run_analysis.R
-
+library(dplyr)
 # http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones 
 
 # Here are the data for the project: 
@@ -64,12 +64,16 @@ unzip(destfile)
       index <- as.integer(data[i,2])
       data[i,2] <- activities[index]
     }
-# Extracts only the measurements on the mean and standard deviation for each measurement. 
-# Uses descriptive activity names to name the activities in the data set
-# Appropriately labels the data set with descriptive variable names. 
-# Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
+# Creates a second, independent tidy data set with the average of each variable for each activity and each subject.   
+  data2 <- tbl_df(data)
+  rm(data) # save space
+  data3 <- group_by(data2, Subject_ID, Activity)
+
+# next steps: make sure group_by is OK and figure out summarize() from dplyr
+  
+# Go pull out the right columns
 # Cleanup - run this after the rest is working OK
-#setwd(oldWD)
+setwd(oldWD)
 return()
 
