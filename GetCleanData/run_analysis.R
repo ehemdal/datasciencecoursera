@@ -54,12 +54,21 @@ unzip(destfile)
     rm(subjects,acts,data)
 
   # 4) Combine the two datasets 
-  #    Add column names
-  #    Change first column to descriptive activity names
     data <- rbind(testd, traind)
     rm(testd, traind)
+  #    Add column names
     vars <- c("Subject_ID","Activity", as.vector(features))
     colnames(data) <- vars
+# Extract the columns for means and standard deviations
+  ms <- grep("mean()",names(data))
+  ss <- grep("std()", names(data))
+  keeps <- c(1,2,ms, ss)
+  rm(ms,ss)
+  data <- data[,keeps]
+
+  #    Change first column to descriptive activity names
+
+
     for(i in 1:nrow(data)){
       index <- as.integer(data[i,2])
       data[i,2] <- activities[index]
