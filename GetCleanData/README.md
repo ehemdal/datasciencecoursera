@@ -14,3 +14,5 @@ I have tested this script on a Windows 7 PC, but not on other platforms.  The sc
 
 Files:
 CodeBook.md:  The codebook file.
+README.md: The instruction list (this file).
+run_analysis.R: The script file.
