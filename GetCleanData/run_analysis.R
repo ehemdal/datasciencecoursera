@@ -11,8 +11,7 @@ library(dplyr)
 # Obtain the data, unless we already have it
 # Grab our current WD, and save it; then go to the chosen work directory so 
 # that we'll leave the WD where it started
-oldWD <- getwd()
-setwd("C:/git/datasciencecoursera/GetCleanData")
+oldwd <- getwd()
 if (!file.exists("rawdata.zip")) {
   setInternet2(TRUE)
   sourceurl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
@@ -53,7 +52,6 @@ unzip(destfile)
     acts <- read.table ("y_train.txt")
     subjects <- read.table("subject_train.txt")
     traind <- cbind(subjects,acts,data)
-    #rm(subjects,acts,data)
 
   # 4) Combine the two datasets 
     data <- rbind(testd, traind)
@@ -107,12 +105,8 @@ unzip(destfile)
   colnames(result) <- names(data)
   rownames(result) <- NULL
 
-# Write the final dataset
+# Write the final dataset in our starting directory
 print ("writing final dataset.")
-setwd("C:/git/datasciencecoursera/GetCleanData")
+setwd(oldwd)
 write.table(result, file = "tidy_avg.txt", row.names = FALSE)
-
-# Cleanup - run this after the rest is working OK
-setwd(oldWD)
-
 

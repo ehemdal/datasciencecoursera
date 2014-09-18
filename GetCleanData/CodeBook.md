@@ -13,9 +13,11 @@ I acknowledge use of this original data:
 
 Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
 
-# The Original data
+# Study Design
 
-The dataset was created from the original data, which is described here and which I have provided verbatim from the original codebook.
+My design choices were set by the requirements of the assignment, which asked to determine the averages of each of the means and standard deviations found in the original dataset.
+
+For reference, and because my cleanup script downloads the original dataset, I am including the original codebook here.
 
 Feature Selection 
 =================
@@ -77,7 +79,7 @@ tBodyGyroJerkMean
 
 The complete list of variables of each feature vector is available in 'features.txt'
 
-# The Modified Dataset
+# Code Book
 
 The R script run_analysis.R performs the following actions:
 
@@ -89,11 +91,17 @@ The R script run_analysis.R performs the following actions:
 - 6) Calculates the means of the subsets of each variable found by filtering on Subject_ID and Activity.
 - 7) Writes the resulting dataset to a file tidy_avg.txt in the working directory c:/git/datasciencecoursera using data.table().
 
-# THe Variables:
+## The Variables:
 
 "Subject_ID": The identification number for each test subject, an integer value from 1 to 30.
 
 "Activity": Activity names from the following list: "WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS" "SITTING", "STANDING", "LAYING"       
+
+THe remaining values in the dataset are average values of the corresponding data items in the original dataset, grouped in subsets by the Subject_ID and Activity.  Since the original values were normalized, these variables are dimensionless.
+
+For the physical interpretation of the original variables, please refer to the original codebook information above. 
+
+Here are the names of the remaining variables in the dataset:
 
 "tBodyAcc-mean()-X" "tBodyAcc-mean()-Y" "tBodyAcc-mean()-Z" 
 "tGravityAcc-mean()-X" "tGravityAcc-mean()-Y" "tGravityAcc-mean()-Z" 
@@ -123,3 +131,7 @@ The R script run_analysis.R performs the following actions:
 "fBodyAccMag-std()" "fBodyBodyAccJerkMag-std()" "fBodyBodyGyroMag-std()" 
 "fBodyBodyGyroJerkMag-std()"
 
+## Files:
+CodeBook.md:  The codebook file.
+README.md: The instruction list (this file).
+run_analysis.R: The script file.
