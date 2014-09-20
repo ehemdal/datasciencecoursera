@@ -83,13 +83,13 @@ The complete list of variables of each feature vector is available in 'features.
 
 The R script run_analysis.R performs the following actions:
 
-- 1) Downloads the raw data to directory "C:/git/datasciencecoursera/GetCleanData", unless the dataset is already downloaded.
+- 1) Downloads the raw data to the current working directory, unless the dataset is already downloaded.
 - 2) Unzips the resulting .ZIP file, which populates the UCI HAR Dataset subdirectory, unless the subdirectory already exists.
 - 3) Uses the provided activity labels and subject ID's to reconstruct these items for both the test and training datasets.  It then combines the two datasets, using rbind(), because the two sets were originally created by randomly extracting records from the starting data.
 - 4) Extracts the variables related to mean and standard deviation by dropping columns that do not include "std()" and "mean()" in the column names. 
 - 5) Replaces the activity numbers with the Activity names.
 - 6) Calculates the means of the subsets of each variable found by filtering on Subject_ID and Activity.
-- 7) Writes the resulting dataset to a file tidy_avg.txt in the working directory c:/git/datasciencecoursera using data.table().
+- 7) Writes the resulting dataset to a file tidy_avg.txt in the working directory using data.table().
 
 ## The Variables:
 
@@ -97,7 +97,7 @@ The R script run_analysis.R performs the following actions:
 
 "Activity": Activity names from the following list: "WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS" "SITTING", "STANDING", "LAYING"       
 
-THe remaining values in the dataset are average values of the corresponding data items in the original dataset, grouped in subsets by the Subject_ID and Activity.  Since the original values were normalized, these variables are dimensionless.
+The remaining values in the dataset are average values of the corresponding data items in the original dataset, grouped in subsets by the Subject_ID and Activity.  Since the original values were normalized, these variables are dimensionless.
 
 For the physical interpretation of the original variables, please refer to the original codebook information above. 
 
@@ -132,6 +132,6 @@ Here are the names of the remaining variables in the dataset:
 "fBodyBodyGyroJerkMag-std()"
 
 ## Files:
-CodeBook.md:  The codebook file.
-README.md: The instruction list (this file).
-run_analysis.R: The script file.
+- CodeBook.md:  The codebook file (this file).
+- README.md: The instruction list.
+- run_analysis.R: The script file.
