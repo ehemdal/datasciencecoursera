@@ -13,6 +13,11 @@ I acknowledge use of this original data:
 
 Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
 
+I also acknowledge use of R v.3.1.1:
+
+R Core Team (2014). R: A language and environment for statistical computing. R Foundation for
+  Statistical Computing, Vienna, Austria. URL http://www.R-project.org/.
+
 # Study Design
 
 My design choices were set by the requirements of the assignment, which asked to determine the averages of each of the means and standard deviations found in the original dataset.
@@ -93,13 +98,15 @@ The R script run_analysis.R performs the following actions:
 
 ## The Variables:
 
+I have added the following columns in the resulting dataset:
+
 "Subject_ID": The identification number for each test subject, an integer value from 1 to 30.
 
 "Activity": Activity names from the following list: "WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS" "SITTING", "STANDING", "LAYING"       
 
 The remaining values in the dataset are average values of the corresponding data items in the original dataset, grouped in subsets by the Subject_ID and Activity.  Since the original values were normalized, these variables are dimensionless.
 
-For the physical interpretation of the original variables, please refer to the original codebook information above. 
+I have not changed the names of these variables from the originals to avoid confusion about the source of the columns in the dataset.  For example, the parentheses in the original variable names indicate that these have been post-processed from the raw sensor data as described in the original codebook.  For the physical interpretation of the original variables, please refer to the original codebook information above. 
 
 Here are the names of the remaining variables in the dataset:
 
